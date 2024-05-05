@@ -47,3 +47,31 @@ void linea::agregar_estacion(const char *nombre, int tiempo_ante, int tiempo_sig
     tiempo_sig[posicion]=tiempo_siguiente;
 }
 
+void linea::eliminar_estacion(int posicion)
+{
+    int nueva_capacidad=capacidad-1;
+    while(posicion<0 || posicion>tamano){
+        std::cout<<"posicion no valida agrege una valida"<<std::endl;
+        std::cin>>posicion;
+    }
+    estacion *nueva_estaciones= new estacion[nueva_capacidad];
+    int *nuevo_tiempo_ant=new int[nueva_capacidad];
+    int *nuevo_tiempo_sig=new int[nueva_capacidad];
+    for(int i=0;i<nueva_capacidad;i++){
+        if(i!=posicion){
+            nuevo_tiempo_ant[i]=tiempo_ant[i];
+            nuevo_tiempo_sig[i]=tiempo_sig[i];
+            nueva_estaciones[i]=estaciones[i];
+        }
+        else i++;
+    }
+    delete[] estaciones;
+    delete[] tiempo_ant;
+    delete[] tiempo_sig;
+    estaciones = nueva_estaciones;
+    tiempo_ant=nuevo_tiempo_ant;
+    tiempo_sig=nuevo_tiempo_sig;
+    capacidad=nueva_capacidad;
+
+}
+

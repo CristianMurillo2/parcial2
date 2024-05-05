@@ -13,6 +13,7 @@ public:
     linea();
     ~linea();
     void agregar_estacion(const char *nombre,int tiempo_anterior,int tiempo_siguiente,int posicion);
+    void eliminar_estacion(int posicion);
 };
 
 #endif // LINEA_H
