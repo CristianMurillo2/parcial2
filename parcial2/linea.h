@@ -14,6 +14,7 @@ public:
     ~linea();
     void agregar_estacion(const char *nombre,int tiempo_anterior,int tiempo_siguiente,int posicion);
     void eliminar_estacion(int posicion);
+    void cambiar_tiempo(int posicion,int nuevo_tiempo_ant,int nuevo_tiempo_sig);
 };
 
 #endif // LINEA_H

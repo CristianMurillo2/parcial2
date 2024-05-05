@@ -1,6 +1,5 @@
 #include "linea.h"
 linea::linea(): tamano(0), capacidad(2){
-
     estaciones= new estacion[capacidad];
     tiempo_ant= new int[capacidad];
     tiempo_sig=new int[capacidad];
@@ -72,6 +71,15 @@ void linea::eliminar_estacion(int posicion)
     tiempo_ant=nuevo_tiempo_ant;
     tiempo_sig=nuevo_tiempo_sig;
     capacidad=nueva_capacidad;
+}
 
+void linea::cambiar_tiempo(int posicion,int nuevo_tiempo_ant,int nuevo_tiempo_sig)
+{
+    while(posicion<0||posicion>tamano){
+        std::cout<<"posicion no valida agrege una valida"<<std::endl;
+        std::cin>>posicion;
+    }
+    tiempo_ant[posicion]=nuevo_tiempo_ant;
+    tiempo_sig[posicion]=nuevo_tiempo_sig;
 }
 
