@@ -1,18 +1,18 @@
 #ifndef LINEA_H
 #define LINEA_H
-#include "estacion.h"
+#include "Estacion.h"
 #include <iostream>
-class linea
+class Linea
 {
 private:
-    estacion *estaciones;
-    int tamano,capacidad;
+    Estacion **estaciones;
+    int capacidad_estaciones,numestaciones;
+    char nombre;
     int *tiempo_sig, *tiempo_ant;
-
 public:
-    linea();
-    ~linea();
-    void agregar_estacion(const char *nombre,int tiempo_anterior,int tiempo_siguiente,int posicion);
+    Linea(const char *nombre);
+    ~Linea();
+    void agregar_estacion(Estacion *estacion, int tiempo_ante,int tiempo_siguiente,int posicion);
     void eliminar_estacion(int posicion);
     void cambiar_tiempo(int posicion,int nuevo_tiempo_ant,int nuevo_tiempo_sig);
 };
