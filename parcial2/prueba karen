@@ -1,0 +1,53 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+// Clase Estacion
+class Estacion {
+public:
+    std::string nombre;
+    Estacion(std::string nombre) : nombre(nombre) {}
+};
+
+// Clase Linea
+class Linea {
+public:
+    std::string nombre;
+    std::string tipoTransporte;
+    std::vector<Estacion> estaciones;
+    Linea(std::string nombre, std::string tipoTransporte) : nombre(nombre), tipoTransporte(tipoTransporte) {}
+    void agregarEstacion(Estacion estacion) {
+        estaciones.push_back(estacion);
+    }
+};
+
+// Clase Metro
+class Metro {
+public:
+    std::vector<Linea> lineas;
+    void agregarLinea(Linea linea) {
+        lineas.push_back(linea);
+    }
+    void simularMetro() {
+        // Aquí puedes implementar la lógica de simulación del movimiento de los trenes y la interacción con las estaciones
+        std::cout << "Simulación del Metro en curso..." << std::endl;
+    }
+};
+
+int main() {
+    Metro metro;
+
+    Linea linea1("Linea 1", "Tren");
+    linea1.agregarEstacion(Estacion("Estacion A"));
+    linea1.agregarEstacion(Estacion("Estacion B"));
+    metro.agregarLinea(linea1);
+
+    Linea linea2("Linea 2", "Tranvía");
+    linea2.agregarEstacion(Estacion("Estacion X"));
+    linea2.agregarEstacion(Estacion("Estacion Y"));
+    metro.agregarLinea(linea2);
+
+    metro.simularMetro();
+
+    return 0;
+}
