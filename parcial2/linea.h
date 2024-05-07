@@ -26,7 +26,6 @@ public:
     void lineas(std::string nombre, std::string tipoTransporte);
     void con_linea(std::string nombre, std::string tipoTransporte):nombre(nombre),tipoTransporte(tipoTransporte),siguiente(nullptr){}
     int cantidadEstaciones();
-};
-
+}
 
 #endif // LINEA_H

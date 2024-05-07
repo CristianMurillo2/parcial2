@@ -1,11 +1,14 @@
+#include "estacion.h"
 #include "linea.h"
-linea::linea() : tamano(0), capacidad(2) {
-    estaciones = new estacion[capacidad];
-    tiempo_ant = new int[capacidad];
-    tiempo_sig = new int[capacidad];
+#include "metro.h"
+linea::linea(): tamano(0), capacidad(2){
+
+    estaciones= new estacion[capacidad];
+    tiempo_ant= new int[capacidad];
+    tiempo_sig=new int[capacidad];
 }
 
-linea::~linea() {
+linea::~linea(){
     delete[] estaciones;
     delete[] tiempo_ant;
     delete[] tiempo_sig;
@@ -111,8 +114,7 @@ void linea::eliminar_estacion(int posicion, int nuevo_tiempo_ant, int nuevo_tiem
     tamano--;
 }
 
-void linea::lineas(std::string nombre, std::string tipoTransporte) : nombre(nombre), tipoTransporte(tipoTransporte), numEstaciones(0)
-{
+void linea::lineas(std::string nombre, std::string tipoTransporte) : nombre(nombre), tipoTransporte(tipoTransporte), numEstaciones(0){
     estaciones = new Estacion*[numEstaciones];
 }
 
