@@ -6,7 +6,9 @@
 class metro
 {
 public:
-    metro();
+    linea** lineas;
+    int numLineas;
+    metro() ;
     linea* primeraLinea;
     metro() : primeraLinea(nullptr) {}
     void agregarLinea(std::string nombreLinea, std::string tipoTransporte);

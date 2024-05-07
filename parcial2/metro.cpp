@@ -1,15 +1,14 @@
 #include "metro.h"
 
-metro::metro() {}
+metro::metro() : primeraLinea(nullptr) {}
 
-void metro::agregarLinea(std::string nombreLinea, std::string tipoTransporte)
-{
+void metro::agregarLinea(std::string nombreLinea, std::string tipoTransporte) {
     linea* nuevaLinea = new linea(nombreLinea, tipoTransporte);
 
     if (primeraLinea == nullptr) {
         primeraLinea = nuevaLinea;
     } else {
-        Linea* temp = primeraLinea;
+        linea* temp = primeraLinea;
         while (temp->siguiente != nullptr) {
             temp = temp->siguiente;
         }
@@ -17,8 +16,7 @@ void metro::agregarLinea(std::string nombreLinea, std::string tipoTransporte)
     }
 }
 
-void metro::eliminarLinea(std::string nombreLinea)
-{
+void metro::eliminarLinea(std::string nombreLinea) {
     linea* actual = primeraLinea;
     linea* anterior = nullptr;
 
@@ -40,8 +38,7 @@ void metro::eliminarLinea(std::string nombreLinea)
     std::cout << "No se encontró la línea: " << nombreLinea << std::endl;
 }
 
-int metro::cantidadLineas()
-{
+int metro::cantidadLineas() {
     int count = 0;
     linea* temp = primeraLinea;
     while (temp != nullptr) {
@@ -50,4 +47,3 @@ int metro::cantidadLineas()
     }
     return count;
 }
-
