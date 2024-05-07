@@ -1,13 +1,10 @@
-#include "estacion.h"
+
 #include "linea.h"
-#include "metro.h"
-linea::linea(): tamano(0), capacidad(2){
-
-    estaciones= new estacion[capacidad];
-    tiempo_ant= new int[capacidad];
-    tiempo_sig=new int[capacidad];
+linea::linea() : tamano(0), capacidad(2) {
+    estaciones = new estacion[capacidad];
+    tiempo_ant = new int[capacidad];
+    tiempo_sig = new int[capacidad];
 }
-
 linea::~linea(){
     delete[] estaciones;
     delete[] tiempo_ant;
@@ -17,38 +14,37 @@ linea::~linea(){
 void linea::agregar_estacion(const char *nombre, int tiempo_ante, int tiempo_siguiente, int posicion)
 {
     tamano++;
-    while(posicion<0 || posicion>tamano){
-        std::cout<<"posicion no valida agrege una valida"<<std::endl;
-        std::cin>>posicion;
+    while (posicion < 0 || posicion > tamano) {
+        std::cout << "posicion no valida, ingrese una posicion valida: ";
+        std::cin >> posicion;
     }
-    if(tamano>=capacidad){
-        int nueva_capacidad = capacidad+1;
-        estacion *nueva_estaciones= new estacion[nueva_capacidad];
-        int *nuevo_tiempo_ant=new int[nueva_capacidad];
-        int *nuevo_tiempo_sig=new int[nueva_capacidad];
-        for(int i=0;i<tamano; i++){
-            nueva_estaciones[i]=estaciones[i];
-            nuevo_tiempo_ant[i]=tiempo_ant[i];
+    if (tamano >= capacidad) {
+        int nueva_capacidad = capacidad + 1;
+        estacion* nueva_estaciones = new estacion[nueva_capacidad];
+        int* nuevo_tiempo_ant = new int[nueva_capacidad];
+        for (int i = 0; i < tamano; i++) {
+            nueva_estaciones[i] = estaciones[i];
+            nuevo_tiempo_ant[i] = tiempo_ant[i];
         }
         delete[] estaciones;
         delete[] tiempo_ant;
+        delete[] tiempo_sig;
         estaciones = nueva_estaciones;
-        tiempo_ant=nuevo_tiempo_ant;
-        tiempo_sig=nuevo_tiempo_sig;
-        capacidad=nueva_capacidad;
+        tiempo_ant = nuevo_tiempo_ant;
+        capacidad = nueva_capacidad;
     }
-    for(int i=tamano;i>posicion;i--){
-        estaciones[i]=estaciones[i-1];
-        tiempo_ant[i]=tiempo_ant[i-1];
+    for (int i = tamano; i > posicion; i--) {
+        estaciones[i] = estaciones[i - 1];
+        tiempo_ant[i] = tiempo_ant[i - 1];
     }
-    estaciones[posicion]=estacion(nombre);
-    tiempo_ant[posicion-1]=tiempo_ante;
-    tiempo_ant[posicion]=tiempo_siguiente;
+    estaciones[posicion] = estacion(nombre, tiempo_ante, tiempo_siguiente);
+    tiempo_ant[posicion - 1] = tiempo_ante;
+    tiempo_ante[posicion]=tiempo_siguiente;
 }
 
 void linea::agregarEstacion_linea(estacion *estacion)
 {
-    Estacion** temp = new Estacion*[numEstaciones + 1];
+    estacion** temp = new Estacion*[(numEstaciones)+1];
     for (int i = 0; i < numEstaciones; ++i) {
         temp[i] = estaciones[i];
     }
@@ -60,7 +56,7 @@ void linea::agregarEstacion_linea(estacion *estacion)
 
 void linea::eliminarEstacion(std::string nombreEstacion)
 {
-    Estacion** temp = new Estacion*[numEstaciones - 1];
+    Estacion** temp = new Estacion*[(numEstaciones) - 1];
     int j = 0;
     for (int i = 0; i < numEstaciones; ++i) {
         if (estaciones[i]->nombre != nombreEstacion) {
@@ -73,7 +69,6 @@ void linea::eliminarEstacion(std::string nombreEstacion)
     --numEstaciones;
 }
 
-}
 
 void linea::cambiar_tiempo(int posicion, int nuevo_tiempo_ant, int nuevo_tiempo_sig)
 {
@@ -115,7 +110,7 @@ void linea::eliminar_estacion(int posicion, int nuevo_tiempo_ant, int nuevo_tiem
 }
 
 void linea::lineas(std::string nombre, std::string tipoTransporte) : nombre(nombre), tipoTransporte(tipoTransporte), numEstaciones(0){
-    estaciones = new Estacion*[numEstaciones];
+    estaciones = new estacion*[numEstaciones];
 }
 
 int linea::cantidadEstaciones()

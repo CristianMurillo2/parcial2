@@ -1,19 +1,21 @@
 #ifndef METRO_H
 #define METRO_H
-#include "estacion.h"
+
 #include "linea.h"
 #include <string>
-class metro
-{
+
+class metro {
 public:
-    linea** lineas;
-    int numLineas;
-    metro() ;
     linea* primeraLinea;
-    metro() : primeraLinea(nullptr) {}
+    metro();
+    ~metro();
     void agregarLinea(std::string nombreLinea, std::string tipoTransporte);
     void eliminarLinea(std::string nombreLinea);
     int cantidadLineas();
+    int contarEstacionesRedMetroExtendido(const metro& redMetro);
+    bool estacionPerteneceALineaExtendido(const char* nombreEstacion, const linea& linea, const metro& redMetro);
+    int calcularTiempoViaje(const std::string& nombreLinea, const std::string& nombreEstacionOrigen, const std::string& nombreEstacionDestino);
+
 };
 
 #endif // METRO_H
